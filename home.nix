@@ -56,8 +56,22 @@
     lsof # list open files
   ];
  
-  programs.fzf = {
+  programs.foot = {
     enable = true;
+    settings = {
+      main = {
+        dpi-aware = "yes";
+        font = "monospace:size=10";
+        term = "xterm-256color";
+      };
+      mouse = {
+        hide-when-typing = "yes";
+      };
+    };
+  };
+
+  programs.fzf = {
+    enable = false;
     enableBashIntegration = true;
   };
 
@@ -73,6 +87,17 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+  };
+
+
+  wayland.windowManager.sway = {
+    enable = true;
+    config = {
+      modifier = "Mod4";
+      window = {
+        border = 3;
+      };
+    };
   };
 
   # This value determines the home Manager release that your
