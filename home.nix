@@ -99,48 +99,86 @@
 
   programs.waybar = {
     enable = true;
+    settings = {
+      mainBar = let inherit (config.home-manager.users.user.programs.waybar.settings) modifier menu;
+      in lib.mkOptionDefault {
+        layer = "top";
+        position = "top";
+        height = 30;
+        spacing = 4;
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+          "sway/scratchpad"
+          "custom/media"
+        ];
+        modules-center = [
+          "sway/window"
+        ];
+        modules-right = [
+          "mpd"
+          "idle_inhibitor"
+          "pulseaudio"
+          "network"
+          "power-profiles-daemon"
+          "cpu"
+          "memory"
+          "temperature"
+          "backlight"
+          "keyboard-state"
+          "battery"
+          "clock"
+          "tray"
+        ];
+        "clock" =  {
+        # timezone = "America/New_York";
+        tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        format-alt =  "{:%Y-%m-%d}";
+        };
+      };
+    };
   };
 
-services.swayidle =
-let
-  # Lock command
-  lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
-  # TODO: modify "display" function based on your window manager
-  # Sway
-  display = status: "${pkgs.sway}/bin/swaymsg 'output * power ${status}'";
-  # Hyprland
-  # display = status: "hyprctl dispatch dpms ${status}";
-  # Niri
-  # display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
-in
-{
-  enable = true;
-  timeouts = [
-    {
-      timeout = 555; # in seconds
-      command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
-    }
-    {
-      timeout = 600;
-      command = lock;
-    }
-    {
-      timeout = 900;
-      command = display "off";
-      resumeCommand = display "on";
-    }
-    {
-      timeout = 1200;
-      command = "${pkgs.systemd}/bin/systemctl suspend";
-    }
-  ];
-  events = {
-   "before-sleep" = (display "off") + "; " + lock;
-   "after-resume" = display "on";
-   "lock" = (display "off") + "; " + lock;
-   "unlock" = display "on";
+  services.swayidle =
+  let
+    # Lock command
+    lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
+    # TODO: modify "display" function based on your window manager
+    # Sway
+    display = status: "${pkgs.sway}/bin/swaymsg 'output * power ${status}'";
+    # Hyprland
+    # display = status: "hyprctl dispatch dpms ${status}";
+    # Niri
+    # display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
+  in
+  {
+    enable = true;
+    timeouts = [
+      {
+        timeout = 555; # in seconds
+        command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
+      }
+      {
+        timeout = 600;
+        command = lock;
+      }
+      {
+        timeout = 900;
+        command = display "off";
+        resumeCommand = display "on";
+      }
+      {
+        timeout = 1200;
+        command = "${pkgs.systemd}/bin/systemctl suspend";
+      }
+    ];
+    events = {
+     "before-sleep" = (display "off") + "; " + lock;
+     "after-resume" = display "on";
+     "lock" = (display "off") + "; " + lock;
+     "unlock" = display "on";
+    };
   };
-};
 
   wayland.windowManager.sway = {
     enable = true;
