@@ -84,7 +84,16 @@
     };
   };
 
-  programs.firefox.enable = true;
+
+  ## Steam / Gaming
+
+  programs.gamemode.enable = true;
+  programs.steam = {
+    enable = true; # Master switch, already covered in installation
+    remotePlay.openFirewall = true;  # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server hosting
+    # Other general flags if available can be set here.
+  };
 
   programs.sway = {
     enable = true;
@@ -107,13 +116,32 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --background doom --cmd sway";
         user = "greeter";
       };
     };
   };
 
   services.gnome.gnome-keyring.enable = true;
+
+
+  ### AUDIO
+  # Pipewire configuration from https://wiki.nixos.org/wiki/PipeWire
+  # rtkit (optional, recommended) allows Pipewire to use the realtime scheduler for increased performance.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true; # if not already enabled
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment the following
+    #jack.enable = true;
+  };
+  # Explicitly disable pulseaudio to prevent conflicts
+  # https://nixos.wiki/wiki/NixOS_Wiki:Audio
+  services.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
+
+  services.power-profiles-daemon.enable = true;
 
   # Thermald proactively prevents overheating on Intel CPUs and works well with other tools.
   services.thermald.enable = true;

@@ -32,7 +32,9 @@
     unzip
     p7zip
 
-    # utils
+    # audio
+    pavucontrol
+    pamixer
 
     # misc
     bat
@@ -58,6 +60,10 @@
     # system call monitoring
     lsof # list open files
   ];
+ 
+  programs.firefox = {
+    enable = true;
+  };
  
   programs.foot = {
     enable = true;
@@ -173,10 +179,17 @@
           # format-full = "";
           format-icons = ["" "" "" "" ""];
         };
+        idle_inhibitor = {
+          format= "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
+        };
         power-profiles-daemon = {
           format = "{icon}";
-          tooltip-format = "Power profile: {profile}\nCPU driver: {cpu_driver}\nPlatform driver: {platform_driver}";
-          tooltip = true;
+          # tooltip-format = "Power profile: {profile}\nCPU driver: {cpu_driver}\nPlatform driver: {platform_driver}";
+          # tooltip = true;
           format-icons = {
             default = "";
             performance = "";
@@ -215,6 +228,8 @@
       };
     };
   };
+
+  services.network-manager-applet.enable = true;
 
   services.swayidle =
   let
