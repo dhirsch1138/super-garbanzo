@@ -74,6 +74,11 @@
     #wget
   ];
 
+  fonts.packages = with pkgs; [
+    font-awesome
+  ];
+
+
   programs.firefox.enable = true;
 
   programs.sway = {
