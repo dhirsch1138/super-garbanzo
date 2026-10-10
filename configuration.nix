@@ -74,10 +74,19 @@
     #wget
   ];
 
-  fonts.packages = with pkgs; [
-    font-awesome
-  ];
-
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+      font-awesome
+ #     font-awesome_4
+      source-han-sans
+    ];
+    fontconfig.defaultFonts = {
+      serif = [ "Noto Serif" "Source Han Serif" ];
+      sansSerif = [ "Noto Sans" "Source Han Sans" ];
+    };
+  };
 
   programs.firefox.enable = true;
 
