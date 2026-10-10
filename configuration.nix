@@ -59,8 +59,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-
   
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];  
@@ -71,7 +69,6 @@
     mako
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wl-clipboard
-    #wget
   ];
 
   fonts = {
@@ -79,7 +76,6 @@
       noto-fonts
       noto-fonts-color-emoji
       font-awesome
- #     font-awesome_4
       source-han-sans
     ];
     fontconfig.defaultFonts = {
@@ -105,6 +101,8 @@
 
   # List services that you want to enable:
 
+  services.blueman.enable = true;
+
   services.greetd = {
     enable = true;
     settings = {
@@ -127,6 +125,14 @@
     greetd.enableGnomeKeyring = true;
     swaylock.enableGnomeKeyring = true;
   #  gdm.enableGnomeKeyring = true;
+  };
+
+  #
+  # Bluetooth
+  #
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
   };
 
   hardware.graphics = {
