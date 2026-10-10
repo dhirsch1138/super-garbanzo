@@ -259,10 +259,10 @@
         command = display "off";
         resumeCommand = display "on";
       }
-      {
-        timeout = 1200;
-        command = "${pkgs.systemd}/bin/systemctl suspend";
-      }
+      #{
+      #  timeout = 1200;
+      #  command = "${pkgs.systemd}/bin/systemctl suspend";
+      #}
     ];
     events = {
      "before-sleep" = (display "off") + "; " + lock;
