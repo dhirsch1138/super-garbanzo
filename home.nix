@@ -105,6 +105,9 @@
       name = "d";
       email = "dhirsch1138@gmail.com";
     };
+    settings = {
+      safe.directory = "*";
+    };
   };
  
   programs.kitty = {
