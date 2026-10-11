@@ -2,19 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-
-# Setup instructions
-# 1) Add the modules from this repo by importing .modules/default_system.nix
-# 2) Update hostname
-# 3) Set any custom options 
-
 { config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-# 1) Add the modules from this repo by importing .modules/default_system.nix
       ./modules/default_system.nix
     ];
 
@@ -23,7 +16,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-1b3393b2-2dfa-48e6-a480-d7ae4e76e69f".device = "/dev/disk/by-uuid/1b3393b2-2dfa-48e6-a480-d7ae4e76e69f";
-# 2) Update hostname
   networking.hostName = "helios"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -66,7 +58,6 @@
     packages = with pkgs; [];
   };
 
-# 3) Set any custom options 
   programs.steamwrapper.enable = true;
 
   # List packages installed in system profile.
