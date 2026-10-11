@@ -8,15 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/audio.nix
-      ./modules/bluetooth.nix
-      ./modules/fonts.nix
-      ./modules/graphics.nix
-      ./modules/nixsystem.nix
-      ./modules/power.nix
-      ./modules/tuigreet.nix
-      ./modules/steam.nix
-      ./modules/swaywm.nix
+      ./modules/default_system.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
