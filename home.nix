@@ -35,6 +35,15 @@
     # audio
     pavucontrol
     pamixer
+  
+    # editors
+    geany
+ 
+    # images
+    imv
+
+    # file handling
+    lf
 
     # misc
     bat
@@ -70,7 +79,7 @@
     settings = {
       main = {
         dpi-aware = "yes";
-        font = "monospace:size=10";
+        font = "monospace:size=11";
         term = "xterm-256color";
       };
       mouse = {
