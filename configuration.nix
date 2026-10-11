@@ -8,6 +8,15 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/audio.nix
+      ./modules/bluetooth.nix
+      ./modules/fonts.nix
+      ./modules/graphics.nix
+      ./modules/nixsystem.nix
+      ./modules/power.nix
+      ./modules/tuigreet.nix
+      ./modules/steam.nix
+      ./modules/swaywm.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -57,49 +66,12 @@
     packages = with pkgs; [];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  
-  # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];  
-
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    mako
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wl-clipboard
-  ];
+  #  environment.systemPackages = with pkgs; [
+  #    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  ];
 
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-color-emoji
-      font-awesome
-      source-han-sans
-    ];
-    fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Source Han Serif" ];
-      sansSerif = [ "Noto Sans" "Source Han Sans" ];
-    };
-  };
-
-
-  ## Steam / Gaming
-
-  programs.gamemode.enable = true;
-  programs.steam = {
-    enable = true; # Master switch, already covered in installation
-    remotePlay.openFirewall = true;  # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server hosting
-    # Other general flags if available can be set here.
-  };
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
- 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -110,64 +82,9 @@
 
   # List services that you want to enable:
 
-  services.blueman.enable = true;
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --background doom --cmd sway";
-        user = "greeter";
-      };
-    };
-  };
-
-  services.gnome.gnome-keyring.enable = true;
-
-
-  ### AUDIO
-  # Pipewire configuration from https://wiki.nixos.org/wiki/PipeWire
-  # rtkit (optional, recommended) allows Pipewire to use the realtime scheduler for increased performance.
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true; # if not already enabled
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment the following
-    #jack.enable = true;
-  };
-  # Explicitly disable pulseaudio to prevent conflicts
-  # https://nixos.wiki/wiki/NixOS_Wiki:Audio
-  services.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
-
-  services.power-profiles-daemon.enable = true;
-
-  # Thermald proactively prevents overheating on Intel CPUs and works well with other tools.
-  services.thermald.enable = true;
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  security.pam.services = {
-    greetd.enableGnomeKeyring = true;
-    swaylock.enableGnomeKeyring = true;
-  #  gdm.enableGnomeKeyring = true;
-  };
-
-  #
-  # Bluetooth
-  #
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
- 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
