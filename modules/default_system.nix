@@ -11,6 +11,7 @@
       ./system/power.nix
       ./system/tuigreet.nix
       ./system/steam.nix
+      ./system/swap.nix
       ./system/swaywm.nix
     ];
 
