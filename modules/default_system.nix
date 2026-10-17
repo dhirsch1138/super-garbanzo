@@ -2,11 +2,12 @@
 {
 
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./system/audio.nix
       ./system/bluetooth.nix
       ./system/fonts.nix
       ./system/graphics.nix
+      ./system/nix-collect-garbage.nix
       ./system/nixsystem.nix
       ./system/plymouth.nix
       ./system/power.nix

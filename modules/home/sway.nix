@@ -23,7 +23,7 @@
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
       };
       startup = [
-        { command = "kitten panel --edge=background sh -c 'cbonsai -i --life=70 --wait=600'"; }
+        { command = "kitten panel -o background=#191724 --edge=background sh -c 'cbonsai -i --life=70 --wait=600'"; }
         # force sway to go to workspace 1 on initial launch
         # for reasons I have yet to isolate it is going to 0
         { command = "swaymsg 'workspace 1'"; }
