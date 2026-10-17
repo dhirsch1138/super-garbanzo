@@ -8,6 +8,7 @@
       ./system/fonts.nix
       ./system/graphics.nix
       ./system/nixsystem.nix
+      ./system/plymouth.nix
       ./system/power.nix
       ./system/tuigreet.nix
       ./system/steam.nix
