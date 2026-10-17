@@ -51,9 +51,11 @@
     lf
 
     # misc
+    asciiquarium
     bat
     cbonsai
     cowsay
+    cmatrix
     file
     fortune
     which
