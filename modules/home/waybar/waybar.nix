@@ -2,8 +2,11 @@
 
 {
 
+  home.file.".config/waybar/rose-pine/rose-pine.css".source = ./rose-pine/rose-pine.css;
+
   programs.waybar = {
     enable = true;
+    style = ./rose-pine_style.css;
     settings = {
       mainBar = let inherit (config.home-manager.users.user.programs.waybar.settings) modifier menu;
       in lib.mkOptionDefault {
