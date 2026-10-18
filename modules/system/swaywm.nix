@@ -14,6 +14,8 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
+ 
+  programs.dconf.enable = true;
 
   security.pam.services = {
     swaylock.enableGnomeKeyring = true;

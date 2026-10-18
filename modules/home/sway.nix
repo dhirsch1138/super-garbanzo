@@ -1,5 +1,29 @@
 { config, lib, pkgs, ... }:
 
+let
+ 
+  #base
+  border_unfocused = "#2a273f";
+  background_unfocused = border_unfocused;
+  #highlightMed
+  border_focused = "#44415a";  
+  background_focused = border_focused; 
+ 
+  #overlay
+  childborder = "#393552";
+
+  #text
+  text = "#e0def4";
+
+  #rose
+  border_urgent = "#f6c117";
+  background_urgent = border_urgent;
+
+  #highlightHigh
+  indicator = "#56526e";
+  
+in
+
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -14,40 +38,40 @@
       
       colors = {
         urgent = {
-          background = "#eb6f92";
-          border = "#eb6f92";
-          childBorder = "#ebbcba";
-          indicator = "#f6c177";
-          text = "#e0def4";
+          background = background_urgent;
+          border = border_urgent;
+          childBorder = childborder;
+          indicator = indicator;
+          text = text;
         };
         focused = {
-          background = "#31748f";
-          border = "#31748f";
-          childBorder = "#26233a";
-          indicator = "#f6c177";
-          text = "#e0def4";
+          background = background_focused;
+          border = border_focused;
+          childBorder = childborder;
+          indicator = indicator;
+          text = text;
         };
         unfocused = {
-          background = "#908caa";
-          border = "#908caa";
-          childBorder = "#26233a";
-          indicator = "#f6c177";
-          text = "#e0def4";
+          background = background_unfocused;
+          border = childborder;
+          childBorder = childborder;
+          indicator = border_unfocused;
+          text = text;
         };
-        background = "#191724";
+        background = background_unfocused;
         placeholder = {
           background = "";
-          border = "#908caa";
-          childBorder = "#26233a";
-          indicator = "#f6c177";
-          text = "#e0def4";
+          border = border_unfocused;
+          childBorder = childborder;
+          indicator = indicator;
+          text = text;
         };
         focusedInactive = {
-          background = "#908caa";
-          border = "#908caa";
-          childBorder = "#26233a";
-          indicator = "#f6c177";
-          text = "#e0def4";
+          background = background_unfocused;
+          border = border_focused;
+          childBorder = childborder;
+          indicator = indicator;
+          text = text;
         };
       };
 

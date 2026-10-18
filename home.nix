@@ -62,6 +62,16 @@
     gawk
     gnupg
 
+
+    #themes
+    nwg-look  
+ 
+    rose-pine-gtk-theme
+    rose-pine-icon-theme
+    rose-pine-cursor 
+
+
+
     # nix related
     #
     # it provides the command `nom` works just like `nix`
@@ -74,7 +84,7 @@
     # system call monitoring
     lsof # list open files
   ];
- 
+
   programs.firefox = {
     enable = true;
   };
