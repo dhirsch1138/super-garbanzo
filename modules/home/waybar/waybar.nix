@@ -3,10 +3,13 @@
 {
 
   home.file.".config/waybar/rose-pine/rose-pine.css".source = ./rose-pine/rose-pine.css;
+  home.file.".config/waybar/style_map.css".source = ./map_rose-pine.css;
+
+#  home.file.".config/waybar/style.css".source = ./style.css;
 
   programs.waybar = {
     enable = true;
-    style = ./rose-pine_style.css;
+    style = ./style.css;
     settings = {
       mainBar = let inherit (config.home-manager.users.user.programs.waybar.settings) modifier menu;
       in lib.mkOptionDefault {
@@ -56,12 +59,12 @@
           critical-threshold = 80;
           # "format-critical": "{temperatureC}°C {icon}",
           format = "{temperatureC}°C {icon}";
-          format-icons= ["󰉬" "" "󰉪"];
+          format-icons= ["" "" ""];
         };
         backlight = {
           # "device": "acpi_video1",
           format = "{percent}% {icon}";
-          format-icons = ["" "" "" "" "" "" "" "" ""];
+          format-icons = ["" "" "" "" "" "" "" "" ""];
           min-brightness = 1;
         };
         battery = {
@@ -72,7 +75,7 @@
           };
           format = "{capacity}% {icon}";
           format-full = "{capacity}% {icon}";
-          format-charging = "{capacity}% 󰃨";
+          format-charging = "{capacity}% ";
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
           format-good = ""; # An empty format will hide the module
@@ -116,8 +119,8 @@
           format-source-muted = "";
           format-icons = {
             headphone = "";
-            hands-free = "󰂑";
-            headset = "󰂑";
+            hands-free = "";
+            headset = "";
             phone = "";
             portable = "";
             car = "";

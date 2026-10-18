@@ -49,12 +49,11 @@
 
     # file handling
     lf
+    thunar
 
     # misc
-    asciiquarium
     bat
     cbonsai
-    cowsay
     cmatrix
     file
     fortune
@@ -70,7 +69,6 @@
     nix-output-monitor
 
     # productivity
-    hugo # static site generator
     glow # markdown previewer in terminal
 
     # system call monitoring
@@ -95,11 +93,6 @@
     };
   };
 
-  programs.fzf = {
-    enable = false;
-    enableBashIntegration = true;
-  };
-
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
@@ -120,7 +113,8 @@
     enable = true;
     enableCompletion = true;
   };
-
+  
+  services.udiskie.enable = true;
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage

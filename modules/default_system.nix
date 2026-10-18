@@ -11,10 +11,11 @@
       ./system/nixsystem.nix
       ./system/plymouth.nix
       ./system/power.nix
-      ./system/tuigreet.nix
       ./system/steam.nix
       ./system/swap.nix
       ./system/swaywm.nix
+      ./system/tuigreet.nix
+      ./system/usbdrives.nix
     ];
 
 }

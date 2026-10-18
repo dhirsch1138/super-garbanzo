@@ -1,0 +1,25 @@
+/*
+* Map Rose pine into standard
+*
+*/
+
+@import "./rose-pine/rose-pine.css";
+
+@define-color background_base @base;
+@define-color background_surface @surface;
+@define-color background_overlay @overlay;
+
+@define-color text_muted @muted;
+@define-color text_subtle @subtle;
+@define-color text_text @text;
+
+@define-color color_A @love;
+@define-color color_B @gold;
+@define-color color_C @rose;
+@define-color color_D @pine;
+@define-color color_E @foam;
+@define-color color_F @iris;
+
+@define-color alert_highlightLow @highlightLow;
+@define-color alert_highlightMed @highlightMed;
+@define-color alert_highlightHigh @highlightHigh;

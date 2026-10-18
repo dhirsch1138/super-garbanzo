@@ -1,4 +1,4 @@
-@import "./rose-pine/rose-pine.css";
+@import "style_map.css";
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -7,10 +7,9 @@
 }
 
 window#waybar {
-    background-color: @base;
-/*    border-bottom: 3px solid @overlay; */
+    background-color: @background_base;
     border-radius: 50px;
-    color: @base;
+    color: @background_base;
     padding: 20px;
     transition-property: background-color;
     transition-duration: .5s;
@@ -60,7 +59,7 @@ button:hover {
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: @text;
+    color: @text_text;
     border-radius: 10px;
 }
 
@@ -69,17 +68,17 @@ button:hover {
 }
 
 #workspaces button.focused, #workspaces button.active {
-    background-color: @highlightMed;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: @alert_highlightMed;
+    box-shadow: inset 0 -3px @background_base;
 }
 
 #workspaces button.urgent {
-    background-color: @highlightHigh;
+    background-color: @alert_highlightHigh;
 }
 
 #mode {
-    background-color: @love;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: @color_A;
+    box-shadow: inset 0 -3px @background_base;
 }
 
 #clock,
@@ -100,12 +99,12 @@ button:hover {
 #power-profiles-daemon,
 #mpd {
     padding: 0 10px;
-    color: @text;
+    color: @text_text;
     border-radius: 10px;
 }
 
 #window {
-    color: @text;
+    color: @text_text;
 }
 
 #workspaces {
@@ -123,30 +122,30 @@ button:hover {
 }
 
 #clock {
-    background-color: @overlay;
+    background-color: @background_overlay;
 }
 
 #battery {
-    background-color: @overlay;
-    color: @pine;
+    background-color: @background_overlay;
+    color: @color_D;
 }
 
 #battery.charging, #battery.plugged {
-    color: @iris;
-    background-color: @overlay;
+    color: @color_F;
+    background-color: @background_overlay;
 }
 
 @keyframes blink {
     to {
-        background-color: @base;
-        color: @highlightHigh;
+        background-color: @background_base;
+        color: @alert_highlightHigh;
     }
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: @highlightHigh;
+    color: @text_text;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
@@ -159,67 +158,67 @@ button:hover {
 }
 
 #power-profiles-daemon.performance {
-    background-color: @overlay;
-    color: @rose;
+    background-color: @background_overlay;
+    color: @color_C;
 }
 
 #power-profiles-daemon.balanced {
-    background-color: @overlay;
-    color: @foam;
+    background-color: @background_overlay;
+    color: @color_E;
 }
 
 #power-profiles-daemon.power-saver {
-    background-color: @overlay;
-    color: @pine;
+    background-color: @background_overlay;
+    color: @color_D;
 }
 
 label:focus {
-    background-color: @base;
+    background-color: @background_base;
 }
 
 #cpu {
-    background-color: @overlay;
-    color: @love;
+    background-color: @background_overlay;
+    color: @color_A;
 }
 
 #memory {
-    background-color: @overlay;
-    color: @foam;
+    background-color: @background_overlay;
+    color: @color_E;
 }
 
 #disk {
-    background-color: @overlay;
-    color: @pine;
+    background-color: @background_overlay;
+    color: @color_D;
 }
 
 #backlight {
-    background-color: @overlay;
-    color: @foam;
+    background-color: @background_overlay;
+    color: @color_E;
 }
 
 #network {
-    background-color: @overlay;
-    color: @foam;
+    background-color: @background_overlay;
+    color: @color_E;
 }
 
 #network.disconnected {
-    background-color: @overlay;
-    color: @rose;
+    background-color: @background_overlay;
+    color: @color_C;
 }
 
 #pulseaudio {
-    background-color: @surface;
-    color: @gold;
+    background-color: @background_surface;
+    color: @color_B;
 }
 
 #pulseaudio.muted {
-    background-color: @surface;
-    color: @love;
+    background-color: @background_surface;
+    color: @color_A;
 }
 
 #wireplumber {
-    background-color: #fff0f5;
-    color: #000000;
+    background-color: @backgroud_base;
+    color: @text_text;
 }
 
 #wireplumber.muted {
@@ -241,18 +240,18 @@ label:focus {
 }
 
 #temperature {
-    background-color: @overlay;
-    color: @gold;
+    background-color: @background_overlay;
+    color: @color_B;
 }
 
 #temperature.critical {
-    background-color: @overlay;
-    color: @love;
+    background-color: @background_overlay;
+    color: @color_A;
 }
 
 #tray {
-    background-color: @surface;
-    color: @foam;
+    background-color: @background_surface;
+    color: @color_E;
 }
 
 #tray > .passive {
