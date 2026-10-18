@@ -3,6 +3,7 @@
 {
   wayland.windowManager.sway = {
     enable = true;
+    wrapperFeatures.gtk = true;
     config = {
       bars = [
         {
@@ -10,6 +11,46 @@
           command = "waybar";
         }
       ];
+      
+      colors = {
+        urgent = {
+          background = "#eb6f92";
+          border = "#eb6f92";
+          childBorder = "#ebbcba";
+          indicator = "#f6c177";
+          text = "#e0def4";
+        };
+        focused = {
+          background = "#31748f";
+          border = "#31748f";
+          childBorder = "#26233a";
+          indicator = "#f6c177";
+          text = "#e0def4";
+        };
+        unfocused = {
+          background = "#908caa";
+          border = "#908caa";
+          childBorder = "#26233a";
+          indicator = "#f6c177";
+          text = "#e0def4";
+        };
+        background = "#191724";
+        placeholder = {
+          background = "";
+          border = "#908caa";
+          childBorder = "#26233a";
+          indicator = "#f6c177";
+          text = "#e0def4";
+        };
+        focusedInactive = {
+          background = "#908caa";
+          border = "#908caa";
+          childBorder = "#26233a";
+          indicator = "#f6c177";
+          text = "#e0def4";
+        };
+      };
+
       modifier = "Mod4";
       keybindings = let inherit (config.home-manager.users.user.wayland.windowManager.sway.config) modifier menu;
       in lib.mkOptionDefault {
@@ -36,6 +77,16 @@
 
   #Supporting services
   services.blueman-applet.enable = true;
+   
+  services.mako = {
+    enable = true;
+    settings = let inherit (config.home-manager.users.user.services.mako.config) modifier menu;
+      in lib.mkOptionDefault {
+        default-timeout = 10000;     
+      };
+  };
+
   services.network-manager-applet.enable = true;
 
+  
 }
