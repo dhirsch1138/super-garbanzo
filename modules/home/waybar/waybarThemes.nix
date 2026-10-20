@@ -7,15 +7,11 @@ let
   cfg = config.programs.themes_waybar;
 
   cssStylePaths = {
-  #Define the paths for the css file(s) utilized for each style
-  #  all paths must be relative to pwd of this nix file
-  #  pallet files will be staged in relative path to ~/.config/waybar/
-  # palleteFile is the color pallete provided by the theme
-  # mapFile is maps the theme pallete to standard names
-    "rose-pine" = rec {
-      palleteFile = rose-pine/rose-pine.css;
-      mapFile = map_rose-pine.css;
-     };
+    # Define the paths for the files directly as path literals
+    "rose-pine" = {
+      paletteFile = ./rose-pine/rose-pine.css;
+      mapFile = ./map_rose-pine.css;
+    };
   };
 
   # Select the chosen theme, falling back to "rose-pine" if not found
@@ -32,11 +28,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-#    home.file.".config/waybar/style.css".source = ./style.css;
-    home.file.".config/waybar/style_map.css".source = "./" + currentTheme.mapFile;
-    home.file.".config/waybar/pallete.css".source = "./" + currentTheme.palleteFile;
+    home.file.".config/waybar/style_map.css".source = currentTheme.mapFile;
+    home.file.".config/waybar/palette.css".source = currentTheme.paletteFile;
     
     programs.waybar = {
+      enable = true;
       style = ./style.css;
     };
   };

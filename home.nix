@@ -132,6 +132,11 @@
     themeName = "rose-pine-moon";
   };
 
+  programs.themes_waybar = {
+    enable = true;
+    themeName = "rose-pine";
+  };
+
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards

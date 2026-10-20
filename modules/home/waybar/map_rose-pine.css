@@ -3,7 +3,7 @@
 *
 */
 
-@import "./pallete.css";
+@import "./palette.css";
 
 @define-color background_base @base;
 @define-color background_surface @surface;
