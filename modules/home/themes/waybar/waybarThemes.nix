@@ -32,7 +32,6 @@ in {
     home.file.".config/waybar/palette.css".source = currentTheme.paletteFile;
     
     programs.waybar = {
-      enable = true;
       style = ./style.css;
     };
   };
