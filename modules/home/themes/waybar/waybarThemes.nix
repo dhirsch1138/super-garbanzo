@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 ## Theming for waybar
 
@@ -17,7 +22,8 @@ let
   # Select the chosen theme, falling back to "rose-pine" if not found
   currentTheme = cssStylePaths.${cfg.themeName} or cssStylePaths."rose-pine";
 
-in {
+in
+{
   options.programs.themes_waybar = {
     enable = mkEnableOption "enable application theme for waybar";
     themeName = mkOption {
@@ -30,7 +36,7 @@ in {
   config = mkIf cfg.enable {
     home.file.".config/waybar/style_map.css".source = currentTheme.mapFile;
     home.file.".config/waybar/palette.css".source = currentTheme.paletteFile;
-    
+
     programs.waybar = {
       style = ./style.css;
     };

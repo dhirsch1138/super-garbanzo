@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 ## Theming for sway
 
@@ -13,8 +18,8 @@ let
       border_unfocused = "#232136";
       background_unfocused = border_unfocused;
       # highlightMed
-      border_focused = "#44415a";  
-      background_focused = border_focused; 
+      border_focused = "#44415a";
+      background_focused = border_focused;
       # overlay
       childborder = "#393552";
       # text
@@ -30,8 +35,8 @@ let
       border_unfocused = "#191724";
       background_unfocused = border_unfocused;
       # highlightMed
-      border_focused = "#403d52";  
-      background_focused = border_focused; 
+      border_focused = "#403d52";
+      background_focused = border_focused;
       # overlay
       childborder = "#26233a";
       # text
@@ -47,7 +52,8 @@ let
   # Select the chosen theme, falling back to "rose-pine" if not found
   currentTheme = themes.${cfg.themeName} or themes."rose-pine";
 
-in {
+in
+{
   options.programs.themes_sway = {
     enable = mkEnableOption "enable theme application for sway";
     themeName = mkOption {

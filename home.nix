@@ -1,13 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # Import files from the current configuration directory into the Nix store,
   # and create symbolic links pointing to those store files in the Home directory.
 
-  imports =
-    [
-      ./modules/default_home.nix
-    ];
+  imports = [
+    ./modules/default_home.nix
+  ];
 
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
@@ -40,10 +44,10 @@
     # audio
     pavucontrol
     pamixer
-  
+
     # editors
     geany
- 
+
     # images
     imv
 
@@ -62,15 +66,12 @@
     gawk
     gnupg
 
-
     #themes
-    nwg-look  
- 
+    nwg-look
+
     rose-pine-gtk-theme
     rose-pine-icon-theme
-    rose-pine-cursor 
-
-
+    rose-pine-cursor
 
     # nix related
     #
@@ -88,7 +89,7 @@
   programs.firefox = {
     enable = true;
   };
- 
+
   programs.foot = {
     enable = true;
     settings = {
@@ -114,18 +115,17 @@
       safe.directory = "*";
     };
   };
- 
+
   programs.kitty = {
     enable = true;
   };
- 
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
   };
-  
-  services.udiskie.enable = true;
 
+  services.udiskie.enable = true;
 
   programs.themes_sway = {
     enable = true;
