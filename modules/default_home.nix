@@ -6,6 +6,7 @@
       ./home/swayidle.nix
       ./home/sway.nix
       ./home/waybar/waybar.nix
+      ./home/themes/swayThemes.nix
     ];
 
 }

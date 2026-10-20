@@ -1,27 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
- 
-  #base
-  border_unfocused = "#2a273f";
-  background_unfocused = border_unfocused;
-  #highlightMed
-  border_focused = "#44415a";  
-  background_focused = border_focused; 
- 
-  #overlay
-  childborder = "#393552";
 
-  #text
-  text = "#e0def4";
-
-  #rose
-  border_urgent = "#f6c117";
-  background_urgent = border_urgent;
-
-  #highlightHigh
-  indicator = "#56526e";
-  
 in
 
 {
@@ -30,51 +10,11 @@ in
     wrapperFeatures.gtk = true;
     config = {
       bars = [
-        {
-          id = "waybar";
-          command = "waybar";
-        }
-      ];
-      
-      colors = {
-        urgent = {
-          background = background_urgent;
-          border = border_urgent;
-          childBorder = childborder;
-          indicator = indicator;
-          text = text;
-        };
-        focused = {
-          background = background_focused;
-          border = border_focused;
-          childBorder = childborder;
-          indicator = indicator;
-          text = text;
-        };
-        unfocused = {
-          background = background_unfocused;
-          border = childborder;
-          childBorder = childborder;
-          indicator = border_unfocused;
-          text = text;
-        };
-        background = background_unfocused;
-        placeholder = {
-          background = "";
-          border = border_unfocused;
-          childBorder = childborder;
-          indicator = indicator;
-          text = text;
-        };
-        focusedInactive = {
-          background = background_unfocused;
-          border = border_focused;
-          childBorder = childborder;
-          indicator = indicator;
-          text = text;
-        };
-      };
-
+              {
+               id = "waybar";
+               command = "waybar";
+              }
+             ];
       modifier = "Mod4";
       keybindings = let inherit (config.home-manager.users.user.wayland.windowManager.sway.config) modifier menu;
       in lib.mkOptionDefault {
