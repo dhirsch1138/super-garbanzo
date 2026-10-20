@@ -21,8 +21,6 @@ let
   # Select the chosen theme, falling back to "rose-pine" if not found
   currentTheme = cssStylePaths.${cfg.themeName} or cssStylePaths."rose-pine";
 
-  palleteFileTarget = ".config/waybar/" + currentTheme.palleteFile;
-
 in {
   options.programs.themes_waybar = {
     enable = mkEnableOption "enable application theme for waybar";
@@ -34,12 +32,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.file.".config/waybar/style.css".source = ./style.css;
+#    home.file.".config/waybar/style.css".source = ./style.css;
     home.file.".config/waybar/style_map.css".source = "./" + currentTheme.mapFile;
-    home.file.palleteFileTarget.source = "./" + currentTheme.palleteFile;
+    home.file.".config/waybar/pallete.css".source = "./" + currentTheme.palleteFile;
     
     programs.waybar = {
-      style = "./style.css";
+      style = ./style.css;
     };
   };
 }

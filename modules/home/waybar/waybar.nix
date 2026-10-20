@@ -2,17 +2,8 @@
 
 {
 
-#  home.file.".config/waybar/rose-pine/rose-pine.css".source = ./rose-pine/rose-pine.css;
-#  home.file.".config/waybar/rose-pine/rose-pine-dawn.css".source = ./rose-pine/rose-pine-dawn.css;
-#  home.file.".config/waybar/rose-pine/rose-pine-moon.css".source = ./rose-pine/rose-pine-moon.css;
-
-#  home.file.".config/waybar/style_map.css".source = ./map_rose-pine.css;
-
-#  home.file.".config/waybar/style.css".source = ./style.css;
-
   programs.waybar = {
     enable = true;
-#    style = ./style.css;
     settings = {
       mainBar = let inherit (config.home-manager.users.user.programs.waybar.settings) modifier menu;
       in lib.mkOptionDefault {

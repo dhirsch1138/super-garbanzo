@@ -3,7 +3,7 @@
 *
 */
 
-@import "./rose-pine/rose-pine-moon.css";
+@import "./pallete.css";
 
 @define-color background_base @base;
 @define-color background_surface @surface;
