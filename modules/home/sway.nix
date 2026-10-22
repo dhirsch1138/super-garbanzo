@@ -47,6 +47,9 @@ in
         border = 3;
       };
     };
+    extraConfig = ''
+      hide_edge_borders smart_no_gaps
+    '';
   };
 
   #Supporting services

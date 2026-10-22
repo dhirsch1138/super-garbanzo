@@ -17,6 +17,14 @@ let
       paletteFile = ./rose-pine/rose-pine.css;
       mapFile = ./map_rose-pine.css;
     };
+    "rose-pine-dawn" = {
+      paletteFile = ./rose-pine/rose-pine-dawn.css;
+      mapFile = ./map_rose-pine.css;
+    };
+    "rose-pine-moon" = {
+      paletteFile = ./rose-pine/rose-pine-moon.css;
+      mapFile = ./map_rose-pine.css;
+    };
   };
 
   # Select the chosen theme, falling back to "rose-pine" if not found

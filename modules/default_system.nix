@@ -10,6 +10,7 @@
     ./system/nixsystem.nix
     ./system/plymouth.nix
     ./system/power.nix
+    ./system/security.nix
     ./system/steam.nix
     ./system/swap.nix
     ./system/swaywm.nix

@@ -207,7 +207,7 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: @background_surface;
+    background-color: @background_overlay;
     color: @color_B;
 }
 
@@ -250,7 +250,7 @@ label:focus {
 }
 
 #tray {
-    background-color: @background_surface;
+    background-color: @background_overlay;
     color: @color_E;
 }
 
@@ -264,7 +264,7 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    background-color: @background_overlay;
 }
 
 #idle_inhibitor.activated {

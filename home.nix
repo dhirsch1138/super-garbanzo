@@ -67,17 +67,17 @@
     gnupg
 
     #themes
-    nwg-look
-
-    rose-pine-gtk-theme
-    rose-pine-icon-theme
-    rose-pine-cursor
+    # nwg-look
+    # rose-pine-gtk-theme
+    # rose-pine-icon-theme
+    # rose-pine-cursor
 
     # nix related
     #
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
+    nixfmt
 
     # productivity
     glow # markdown previewer in terminal
@@ -134,7 +134,19 @@
 
   programs.themes_waybar = {
     enable = true;
-    themeName = "rose-pine";
+    themeName = "rose-pine-moon";
+  };
+  
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.rose-pine-icon-theme;
+      name = "rose-pine-moon";
+    };
+    theme = { 
+      package = pkgs.rose-pine-gtk-theme;
+      name = "rose-pine-rose";
+    };
   };
 
   # This value determines the home Manager release that your

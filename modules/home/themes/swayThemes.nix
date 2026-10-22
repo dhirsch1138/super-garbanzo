@@ -13,6 +13,23 @@ let
 
   # Define themes in a lookup table using recursive attribute sets (rec)
   themes = {
+    "rose-pine-dawn" = rec {
+      # base
+      border_unfocused = "#faf4ed";
+      background_unfocused = border_unfocused;
+      # highlightMed
+      border_focused = "#dfdad9";
+      background_focused = border_focused;
+      # overlay
+      childborder = "#f2e9e1";
+      # text
+      text = "#464261";
+      # rose
+      border_urgent = "#d7827e";
+      background_urgent = border_urgent;
+      # highlightHigh
+      indicator = "#cecacd";
+    };
     "rose-pine-moon" = rec {
       # base
       border_unfocused = "#232136";
@@ -83,9 +100,10 @@ in
           };
           unfocused = {
             background = currentTheme.background_unfocused;
-            border = currentTheme.childborder;
-            childBorder = currentTheme.childborder;
-            indicator = currentTheme.border_unfocused;
+            border = currentTheme.border_unfocused;
+            childBorder = currentTheme.border_unfocused;
+#            childBorder = currentTheme.childborder;
+            indicator = currentTheme.indicator;
             text = currentTheme.text;
           };
           background = currentTheme.background_unfocused;
