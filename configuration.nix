@@ -60,6 +60,16 @@
 
   programs.steamwrapper.enable = true;
 
+  services.slowflakes = {
+    enable = true;
+    delayDays = 7;                       # Number of days to delay flake.lock updates [7]
+    enableLocalAutomation = true;        # Enables the daily background systemd timer [7]
+    repoPath = "/etc/nixos";             # Absolute path to your primary repo [7]
+  };
+
+  boot.acpiFix.enableForce = true;
+  boot.acpiFix.enableEnforceResourcesLax = true;
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   #  environment.systemPackages = with pkgs; [

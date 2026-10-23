@@ -2,6 +2,7 @@
 {
 
   imports = [
+    ./system/acpi-fix.nix
     ./system/audio.nix
     ./system/bluetooth.nix
     ./system/fonts.nix
@@ -11,6 +12,7 @@
     ./system/plymouth.nix
     ./system/power.nix
     ./system/security.nix
+    ./system/slowflakes
     ./system/steam.nix
     ./system/swap.nix
     ./system/swaywm.nix
