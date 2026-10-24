@@ -12,9 +12,13 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    slowflakes = {
+      url = "github:dhirsch1138/slowflakes";
+      inputs.nixpkgs.follows = "nixpkgs"; # Bind to host system nixpkgs
+    };    
   };
 
-  outputs = { self, home-manager, nixpkgs, ... }@inputs: {
+  outputs = { self, home-manager, slowflakes, nixpkgs, ... }@inputs: {
     # Please replace nixosConfigurations.Foo with your hostname
     nixosConfigurations.helios = nixpkgs.lib.nixosSystem {
       modules = [
@@ -35,6 +39,9 @@
           # Uncomment the next line to make all flake inputs available in home.nix
           # home-manager.extraSpecialArgs = inputs;
         }
+
+        # Import slowflakes module
+        slowflakes.nixosModules.default
       ];
     };
   };

@@ -40,7 +40,28 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "slowflakes": "slowflakes"
+      }
+    },
+    "slowflakes": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792860404,
+        "narHash": "sha256-JKw5Z2+0/fQ756HvTLJkPTpk6pD8MFH+mTuX0L+UWqQ=",
+        "owner": "dhirsch1138",
+        "repo": "slowflakes",
+        "rev": "48f8cbf63ad36ca520d8d9518009beeaa6c2249e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dhirsch1138",
+        "repo": "slowflakes",
+        "type": "github"
       }
     }
   },
