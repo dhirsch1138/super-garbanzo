@@ -37,7 +37,7 @@ slowflakes-status - display diagnostic status of the slowflakes isolated state r
 *slowflakes-status*
 
 # DESCRIPTION
-Inspects the isolated rolling state repository located under */var/lib/slowflakes-state*, reporting systemd background timer/service execution history, total stored snapshots, oldest snapshot timestamp, latest commit metadata, and recent update history.
+Inspects the isolated rolling state repository located under */var/lib/slowflakes-state*, reporting total stored snapshots, oldest snapshot timestamp, latest commit metadata, and recent update history.
 
 # EXIT STATUS
 *0*
@@ -77,6 +77,6 @@ Slowflakes Contributors.
     gzip $out/share/man/man1/*.1
   '';
 in {
-  inherit slowflakesManPagesPackage;
-  package = slowflakesManPagesPackage;
+  slowflakesManPagesPackage = slowflakesManPagesPackage;
+  package = slowflakesManPagesPackage; # Backward-compatibility alias
 }

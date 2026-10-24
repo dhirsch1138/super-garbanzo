@@ -40,63 +40,47 @@ in {
 
         if [ ! -d "$TARGET_STATE_DIR/.git" ]; then
           echo "Isolated state repository not found. Initializing fresh repository at $TARGET_STATE_DIR..."
-          git -C "$TARGET_STATE_DIR" init -b main
-          git -C "$TARGET_STATE_DIR" config user.name "${cfg.gitUserName}"
-          git -C "$TARGET_STATE_DIR" config user.email "${cfg.gitUserEmail}"
+          git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" init -b main
+          git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" config user.name "${cfg.gitUserName}"
+          git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" config user.email "${cfg.gitUserEmail}"
           
           if [ -f "${cfg.repoPath}/flake.nix" ]; then
             echo "Seeding initial baseline flake.nix and flake.lock from ${cfg.repoPath}..."
-            cp ${cfg.repoPath}/flake.nix "$TARGET_STATE_DIR/"
-            cp ${cfg.repoPath}/flake.lock "$TARGET_STATE_DIR/" || true
-            git -C "$TARGET_STATE_DIR" add flake.nix flake.lock || true
-            git -C "$TARGET_STATE_DIR" commit -m "Initial baseline seed" || true
-            echo "Baseline seed successfully committed."
-          else
-            echo "Notice: No baseline flake.nix found at ${cfg.repoPath} during bootstrap initialization. Deferring seed until next run."
-            exit 0
-          fi
-        fi
-
-        cd "$TARGET_STATE_DIR"
-        git config user.name "${cfg.gitUserName}"
-        git config user.email "${cfg.gitUserEmail}"
-
-        if [ -f "${cfg.repoPath}/flake.nix" ]; then
-          echo "Synchronizing latest flake.nix from primary repository (${cfg.repoPath})..."
-          cp "${cfg.repoPath}/flake.nix" ./flake.nix
-        fi
-
-        echo "Running 'nix flake update' to fetch latest upstream changes..."
-        nix flake update
-        echo "Upstream update completed successfully."
-
-        if ! git diff --quiet || ! git diff --cached --quiet; then
-          echo "Changes detected in flake files. Staging and committing update in isolated repo..."
-          git add flake.nix flake.lock
-          git commit -m "chore(flake): automated state update $(date +'%Y-%m-%d')"
-          echo "Successfully committed new state snapshot to isolated repo history."
-
-          RETENTION_DAYS=$(( ${toString cfg.delayDays} * 3 ))
-          CUTOFF_COMMIT=$(git rev-list -n 1 --before="''${RETENTION_DAYS} days ago" HEAD 2>/dev/null || true)
-
-          if [ -n "$CUTOFF_COMMIT" ]; then
-            echo "Pruning Git history older than $RETENTION_DAYS days..."
-            PARENT_COMMIT=$(git rev-parse "$CUTOFF_COMMIT~1" 2>/dev/null || true)
-            if [ -n "$PARENT_COMMIT" ]; then
-              git checkout --orphan temp-branch "$CUTOFF_COMMIT"
-              git commit -C "$CUTOFF_COMMIT" -m "chore(flake): compacted history baseline $(date +'%Y-%m-%d')"
-              git branch -D main
-              git branch -m main
-              git gc --prune=now --aggressive >/dev/null 2>&1 || true
-              echo "History successfully pruned and compacted."
+            cp "${cfg.repoPath}/flake.nix" "$TARGET_STATE_DIR/"
+            if [ -f "${cfg.repoPath}/flake.lock" ]; then
+              cp "${cfg.repoPath}/flake.lock" "$TARGET_STATE_DIR/"
             fi
+            git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" add flake.nix flake.lock 2>/dev/null || true
+            git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" commit -m "Initial baseline seed" 2>/dev/null || true
           fi
-        else
-          echo "No upstream changes detected. Isolated state repository is already up to date."
         fi
 
-        echo "Slowflakes background update routine completed successfully."
+        echo "Pulling latest flake inputs into isolated state repo..."
+        nix --extra-experimental-features "nix-command flakes" flake update --flake "$TARGET_STATE_DIR"
+
+        if git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" diff --quiet flake.lock; then
+          echo "No upstream flake.lock changes detected. State is up to date."
+        else
+          TODAY=$(date "+%Y-%m-%d")
+          git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" add flake.lock
+          git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" commit -m "chore(flake): automated state update $TODAY"
+          echo "Success: New snapshot committed to isolated state repo for $TODAY."
+        fi
+
+        # History Retention Pruning Rule
+        RETENTION_DAYS=$(( ${toString cfg.delayDays} * 3 ))
+        CUTOFF_COMMIT=$(git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" rev-list -n 1 --before="''${RETENTION_DAYS} days ago" HEAD 2>/dev/null || true)
+
+        if [ -n "$CUTOFF_COMMIT" ]; then
+          COMMIT_COUNT=$(git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" rev-list --count "$CUTOFF_COMMIT..HEAD")
+          if [ "$COMMIT_COUNT" -gt 5 ]; then
+            echo "Pruning historical commits older than $RETENTION_DAYS days (preserving baseline fallback)..."
+            git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" reflog expire --expire=now --all || true
+            git -c safe.directory="$TARGET_STATE_DIR" -C "$TARGET_STATE_DIR" gc --prune=now --aggressive || true
+          fi
+        fi
       '';
+
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
