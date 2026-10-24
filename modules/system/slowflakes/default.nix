@@ -6,9 +6,10 @@ let
 
   scripts = import ./scripts.nix { inherit pkgs cfg stateDir; };
   manPages = import ./manpages.nix { inherit pkgs; };
+  automation = import ./automation.nix { inherit config lib pkgs; };
 in {
   imports = [
-    ./automation.nix
+    automation
   ];
 
   options.services.slowflakes = {
@@ -34,7 +35,7 @@ in {
 
     enableLocalAutomation = lib.mkOption {
       type = lib.types.bool;
-      default = false;
+      default = true;
       description = "Enable a systemd service to daily update the isolated rolling state repo.";
     };
 
@@ -59,10 +60,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      scripts.updateScript
-      scripts.statusScript
-      scripts.cleanupScript
-      manPages.package
+      scripts.slowflakesUpdateScript
+      scripts.slowflakesStatusScript
+      scripts.slowflakesCleanupScript
+      manPages.slowflakesManPagesPackage
     ];
   };
 }

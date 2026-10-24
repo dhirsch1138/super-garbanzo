@@ -1,7 +1,7 @@
 { pkgs, cfg, stateDir, ... }:
 
 let
-  updateScript = pkgs.writeShellApplication {
+  slowflakesUpdateScript = pkgs.writeShellApplication {
     name = "slowflakes-update";
     runtimeInputs = [ pkgs.git ];
     text = ''
@@ -32,6 +32,13 @@ let
         exit 1
       fi
 
+      if ! git diff --quiet flake.lock 2>/dev/null; then
+        echo "Warning: 'flake.lock' has uncommitted local modifications in your working directory." >&2
+        echo "This usually happens if you recently ran a manual update or security hotfix without committing." >&2
+        echo "Aborting to prevent overwriting your uncommitted changes." >&2
+        exit 1
+      fi
+
       echo "Fetching historical lock from isolated state repository..."
       COMMIT_HASH=$(git -C "$TARGET_STATE_DIR" rev-list -n 1 --before="''${DELAY_DAYS} days ago" HEAD 2>/dev/null || true)
 
@@ -59,11 +66,18 @@ let
       fi
 
       TARGET_DATE=$(git -C "$TARGET_STATE_DIR" log -1 --format="%ct" "$COMMIT_HASH")
-      LOCAL_LOCK_DATE=$(git log -1 --format="%ct" -- flake.lock || echo "0")
+      LOCAL_COMMIT_DATE=$(git log -1 --format="%ct" -- flake.lock 2>/dev/null || echo "0")
+      LOCAL_FILE_MTIME=$(date -r flake.lock +%s 2>/dev/null || echo "0")
+
+      if [ "$LOCAL_FILE_MTIME" -gt "$LOCAL_COMMIT_DATE" ]; then
+        LOCAL_LOCK_DATE="$LOCAL_FILE_MTIME"
+      else
+        LOCAL_LOCK_DATE="$LOCAL_COMMIT_DATE"
+      fi
 
       if [ "$TARGET_DATE" -le "$LOCAL_LOCK_DATE" ]; then
         echo "Warning: The selected $DELAY_DAYS-day-old lock is older than or equal to your current local flake.lock modification." >&2
-        echo "This usually happens if you recently applied a manual security hotfix on 'main'." >&2
+        echo "This usually happens if you recently applied a manual security hotfix." >&2
         echo "Aborting to prevent overwriting your newer lockfile." >&2
         exit 1
       fi
@@ -81,9 +95,9 @@ let
     '';
   };
 
-  statusScript = pkgs.writeShellApplication {
+  slowflakesStatusScript = pkgs.writeShellApplication {
     name = "slowflakes-status";
-    runtimeInputs = [ pkgs.git ];
+    runtimeInputs = [ pkgs.git pkgs.systemd ];
     text = ''
       set -euo pipefail
       TARGET_STATE_DIR="${stateDir}"
@@ -91,6 +105,27 @@ let
       echo "=== Slowflakes Status Diagnostic ==="
       echo "State Directory: $TARGET_STATE_DIR"
 
+      echo ""
+      echo "--- Systemd Automation Status ---"
+      if systemctl is-active --quiet slowflakes-localrepo-update.timer 2>/dev/null; then
+        echo "Timer Status:     Active (running)"
+      elif systemctl is-enabled --quiet slowflakes-localrepo-update.timer 2>/dev/null; then
+        echo "Timer Status:     Enabled (inactive)"
+      else
+        echo "Timer Status:     Disabled / Not installed"
+      fi
+
+      LAST_RUN=$(systemctl show slowflakes-localrepo-update.service --property=ExecMainExitTimestamp --value 2>/dev/null || echo "N/A")
+      LAST_RESULT=$(systemctl show slowflakes-localrepo-update.service --property=Result --value 2>/dev/null || echo "N/A")
+
+      if [ -n "$LAST_RUN" ] && [ "$LAST_RUN" != "N/A" ]; then
+        echo "Last Service Run: $LAST_RUN (Result: $LAST_RESULT)"
+      else
+        echo "Last Service Run: Never / Unknown"
+      fi
+
+      echo ""
+      echo "--- State Repository History ---"
       if [ ! -d "$TARGET_STATE_DIR/.git" ]; then
         echo "Status: Isolated state repository not initialized yet."
         exit 0
@@ -109,7 +144,7 @@ let
     '';
   };
 
-  cleanupScript = pkgs.writeShellApplication {
+  slowflakesCleanupScript = pkgs.writeShellApplication {
     name = "slowflakes-cleanup";
     runtimeInputs = [ pkgs.git ];
     text = ''
@@ -140,5 +175,8 @@ let
     '';
   };
 in {
-  inherit updateScript statusScript cleanupScript;
+  inherit slowflakesUpdateScript slowflakesStatusScript slowflakesCleanupScript;
+  updateScript = slowflakesUpdateScript;
+  statusScript = slowflakesStatusScript;
+  cleanupScript = slowflakesCleanupScript;
 }

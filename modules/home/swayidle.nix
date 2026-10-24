@@ -35,14 +35,14 @@
           command = display "off";
           resumeCommand = display "on";
         }
-        #{
-        #  timeout = 1200;
-        #  command = "${pkgs.systemd}/bin/systemctl suspend";
-        #}
+        {
+          timeout = 1200;
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+        }
       ];
       events = {
-        "before-sleep" = (display "off") + "; " + lock;
-        "after-resume" = display "on";
+        "before-sleep" = (display "off") + "; " + lock + "; rfkill block all";
+        "after-resume" = display "on" +"; rfkill unblock all";
         "lock" = (display "off") + "; " + lock;
         "unlock" = display "on";
       };

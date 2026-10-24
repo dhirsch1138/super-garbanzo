@@ -17,6 +17,8 @@ in {
 
     systemd.services.slowflakes-localrepo-update = lib.mkIf cfg.enableLocalAutomation {
       description = "Automated daily update for isolated delayed flake state repo";
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
       path = [ pkgs.git pkgs.nix pkgs.iputils ];
 
       script = ''
