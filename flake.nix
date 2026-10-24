@@ -4,6 +4,12 @@
   inputs = {
     # NixOS official package source, using the nixos-26.05 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.2.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       # The `follows` keyword in inputs is used for inheritance.
@@ -12,13 +18,14 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     slowflakes = {
       url = "github:dhirsch1138/slowflakes";
       inputs.nixpkgs.follows = "nixpkgs"; # Bind to host system nixpkgs
     };    
   };
 
-  outputs = { self, home-manager, slowflakes, nixpkgs, ... }@inputs: {
+  outputs = { self, home-manager, slowflakes, lanzaboote, nixpkgs, ... }@inputs: {
     # Please replace nixosConfigurations.Foo with your hostname
     nixosConfigurations.helios = nixpkgs.lib.nixosSystem {
       modules = [
@@ -40,6 +47,9 @@
           # home-manager.extraSpecialArgs = inputs;
         }
 
+        # Import lanzaboote module
+        lanzaboote.nixosModules.lanzaboote
+ 
         # Import slowflakes module
         slowflakes.nixosModules.default
       ];
