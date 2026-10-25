@@ -78,11 +78,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1792615934,
-        "narHash": "sha256-MlvRfa1O5Cqc2/a+gG+l9TSuowEoCKCmrJ1d9oAVm0I=",
+        "lastModified": 1792898606,
+        "narHash": "sha256-Mg3rRjsbMqhSMxop5PYMXos8SwAjejrxSgVThTvP9eg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "da6dc0e7b26060f2f71ce3ef7088fb56ee44fa36",
+        "rev": "1f607aa79b6356ed45d3cd3c8079c196e79efa2c",
         "type": "github"
       },
       "original": {
@@ -150,15 +150,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1792866676,
-        "narHash": "sha256-ddGscFwXVbYPk7uaj60H1kGxJ+mwgZ8siB3EXuqlsSM=",
+        "lastModified": 1792941568,
+        "narHash": "sha256-dhW4NK6CGP9e2dEh+4GkONJGeABkzg3JD9r3pd69+L8=",
         "owner": "dhirsch1138",
         "repo": "slowflakes",
-        "rev": "36105849fb7e0d6e2667a3d973aa72bef033b616",
+        "rev": "01c21c59696828cb6485e85c1d0b03e9aeb2e64c",
         "type": "github"
       },
       "original": {
         "owner": "dhirsch1138",
+        "ref": "slowflakes0.1",
         "repo": "slowflakes",
         "type": "github"
       }
