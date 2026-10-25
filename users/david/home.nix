@@ -10,7 +10,7 @@
   # and create symbolic links pointing to those store files in the Home directory.
 
   imports = [
-    ./modules/default_home.nix
+    ./../../modules/default_home.nix
   ];
 
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
