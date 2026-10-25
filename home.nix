@@ -82,6 +82,7 @@
     #
     # it provides the command `nom` works just like `nix`
     # with more details log output
+    nil
     nix-output-monitor
     nixfmt
 
