@@ -7,6 +7,9 @@
     ./../modules/default_system.nix
   ];
 
+  # This desktop is a swaywm desktop, so enable the swaywm module.
+  programs.swaywrapper.enable = true;
+
   # Enable secure boot support.
   # This wrapper includes supporting packages, and enables auto key generation and enrollment.
   # When initially deployed, the UEFI will still need to be set to Learn/Setup in the BIOS
