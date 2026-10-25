@@ -52,9 +52,22 @@ in
     '';
   };
 
+  #Supporting programs
+
+  # kitty is used for the bonsai background effect in swaywm
+  programs.kitty = {
+    enable = true;
+  };
+
   #Supporting services
+
+  # enable udisks2 to allow for mounting of usb drives
+  services.udiskie.enable = true;
+
+  # enable bluetooth applet for bluetooth management
   services.blueman-applet.enable = true;
 
+  # enable mako for notifications
   services.mako = {
     enable = true;
     settings =
@@ -66,6 +79,7 @@ in
       };
   };
 
+  # enable network manager applet for network management UI (tray icon)
   services.network-manager-applet.enable = true;
 
 }

@@ -55,7 +55,6 @@
     thunar
 
     # file handlers
-    jq
 
     # misc
     bat
@@ -129,10 +128,6 @@
     };
   };
 
-  programs.kitty = {
-    enable = true;
-  };
-
   programs.themes_sway = {
     enable = true;
     themeName = "rose-pine-moon";
@@ -142,8 +137,6 @@
     enable = true;
     themeName = "rose-pine-moon";
   };
-
-  services.udiskie.enable = true;
 
   programs.vscodewrapper.enable = true;
 
