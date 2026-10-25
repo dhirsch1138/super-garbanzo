@@ -33,6 +33,9 @@
         # so the old configuration file still takes effect
         ./configuration.nix
 
+        # helios should use the personalDesktop.nix configuration
+        ./hosts/personalDesktop.nix 
+
         # make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
         home-manager.nixosModules.home-manager
