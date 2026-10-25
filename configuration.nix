@@ -70,7 +70,7 @@
   boot.acpiFix.enableForce = true;
   boot.acpiFix.enableEnforceResourcesLax = true;
 
-  boot.lanzabootewrapper.enable = false;
+  boot.lanzabootewrapper.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

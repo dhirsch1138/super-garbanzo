@@ -45,6 +45,9 @@
     pavucontrol
     pamixer
 
+    # ide
+    vscode
+
     # editors
     geany
 
