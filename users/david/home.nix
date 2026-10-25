@@ -52,7 +52,6 @@
     # file browser
     lf
     nnn # terminal file manager
-    thunar
 
     # file handlers
 

@@ -59,7 +59,7 @@ in
     enable = true;
   };
 
-  #Supporting services
+  # Supporting services
 
   # enable udisks2 to allow for mounting of usb drives
   services.udiskie.enable = true;

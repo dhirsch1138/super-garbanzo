@@ -5,7 +5,7 @@
   ...
 }:
 
-## Theming for sway
+## VSCode wrapper module
 
 with lib;
 let
