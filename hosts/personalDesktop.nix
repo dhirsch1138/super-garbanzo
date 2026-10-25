@@ -4,7 +4,7 @@
   # It has developer tools, and fun stuff like steam.
 
   imports = [
-    ./../modules/default_system.nix
+    ./../modules/system
   ];
 
   # This desktop is a swaywm desktop, so enable the swaywm module.
