@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 {
-
+  # All of the modules that should be imported for home-manager configurations
   imports = [
-    # Unconditionally include the home modules
     ./home/swayidle.nix
     ./home/sway.nix
     ./home/vscode.nix

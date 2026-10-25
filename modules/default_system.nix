@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-
+  # All of the modules that should be imported for system configurations
   imports = [
     ./system/acpi-fix.nix
     ./system/audio.nix

@@ -1,5 +1,6 @@
 {
   description = "A simple NixOS flake";
+  # I love that description. I refuse to change it.
 
   inputs = {
     # NixOS official package source, using the nixos-26.05 branch here

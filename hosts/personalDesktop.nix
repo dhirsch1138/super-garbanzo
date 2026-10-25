@@ -20,6 +20,10 @@
   # reference: ./../modules/system/steam.nix
   programs.steamwrapper.enable = true;
 
+  # Enable slowflakes with supporting packages and configuration
+  # Provide time delayed flake.lock updates to help avoid breakages from upstream changes
+  # or supply chain issues.
+  # reference: https://github.com/dhirsch1138/slowflakes
   services.slowflakes = {
     enable = true;
     delayDays = 7; # Number of days to delay flake.lock updates [7]
