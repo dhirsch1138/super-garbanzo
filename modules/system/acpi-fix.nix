@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
 let
   cfg = config.boot.acpiFix;
-in {
+in
+{
   options.boot.acpiFix = {
     enableForce = mkOption {
       type = types.bool;

@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
 
   hardware.graphics = {
@@ -7,5 +7,5 @@
   };
 
   #TODO if this ever is used on machine with intel or nvidia graphics add options
- 
+
 }

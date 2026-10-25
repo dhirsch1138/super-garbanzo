@@ -1,7 +1,12 @@
-{ config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
-  hasSwap = config.swapDevices != [];
+  hasSwap = config.swapDevices != [ ];
 in
 {
   # Use zram if no swap devices exist
@@ -9,7 +14,7 @@ in
 
   # Use zswap if swap devices already exist
   boot.zswap = {
-    enable = lib.mkDefault(hasSwap);
+    enable = lib.mkDefault (hasSwap);
     # And optionally configure further:
     maxPoolPercent = 50;
     shrinkerEnabled = true;

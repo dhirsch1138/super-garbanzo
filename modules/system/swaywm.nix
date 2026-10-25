@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
 
   # List packages installed in system profile.
@@ -14,12 +14,12 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
- 
+
   programs.dconf.enable = true;
 
   security.pam.services = {
     swaylock.enableGnomeKeyring = true;
-  #  gdm.enableGnomeKeyring = true;
+    #  gdm.enableGnomeKeyring = true;
   };
 
 }

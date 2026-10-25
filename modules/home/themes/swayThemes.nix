@@ -102,7 +102,7 @@ in
             background = currentTheme.background_unfocused;
             border = currentTheme.border_unfocused;
             childBorder = currentTheme.border_unfocused;
-#            childBorder = currentTheme.childborder;
+            #            childBorder = currentTheme.childborder;
             indicator = currentTheme.indicator;
             text = currentTheme.text;
           };

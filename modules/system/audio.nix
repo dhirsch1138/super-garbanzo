@@ -1,6 +1,5 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
-
 
   # https://wiki.nixos.org/wiki/PipeWire
   # rtkit (optional, recommended) allows Pipewire to use the realtime scheduler for increased performance.

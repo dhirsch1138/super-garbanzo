@@ -1,11 +1,14 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;  
+  nixpkgs.config.allowUnfree = true;
 
   # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];  
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -14,5 +17,5 @@
   ];
 
   nix.settings.auto-optimise-store = true;
-  
+
 }

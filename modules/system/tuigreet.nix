@@ -1,6 +1,6 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
- #TODO: This is hard coded for sway, make this option in future
+  #TODO: This is hard coded for sway, make this option in future
   services.greetd = {
     enable = true;
     settings = {
@@ -13,5 +13,5 @@
 
   security.pam.services = {
     greetd.enableGnomeKeyring = true;
-  };   
+  };
 }

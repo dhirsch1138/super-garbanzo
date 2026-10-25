@@ -33,8 +33,6 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    nnn # terminal file manager
-
     # archives
     zip
     xz
@@ -48,11 +46,12 @@
     # editors
     geany
 
-    # images
+    # image viewers
     imv
 
     # file browser
     lf
+    nnn # terminal file manager
     thunar
 
     # file handlers
@@ -69,12 +68,6 @@
     gawk
     gnupg
 
-    #themes
-    # nwg-look
-    # rose-pine-gtk-theme
-    # rose-pine-icon-theme
-    # rose-pine-cursor
-
     # nix related
     #
     # it provides the command `nom` works just like `nix`
@@ -89,8 +82,10 @@
     lsof # list open files
   ];
 
-  
-  programs.vscodewrapper.enable = true;
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
 
   programs.firefox = {
     enable = true;
@@ -122,16 +117,21 @@
     };
   };
 
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.rose-pine-icon-theme;
+      name = "rose-pine-moon";
+    };
+    theme = {
+      package = pkgs.rose-pine-gtk-theme;
+      name = "rose-pine-rose";
+    };
+  };
+
   programs.kitty = {
     enable = true;
   };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-  };
-
-  services.udiskie.enable = true;
 
   programs.themes_sway = {
     enable = true;
@@ -142,18 +142,10 @@
     enable = true;
     themeName = "rose-pine-moon";
   };
-  
-  gtk = {
-    enable = true;
-    iconTheme = {
-      package = pkgs.rose-pine-icon-theme;
-      name = "rose-pine-moon";
-    };
-    theme = { 
-      package = pkgs.rose-pine-gtk-theme;
-      name = "rose-pine-rose";
-    };
-  };
+
+  services.udiskie.enable = true;
+
+  programs.vscodewrapper.enable = true;
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage

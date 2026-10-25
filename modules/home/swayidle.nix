@@ -42,7 +42,7 @@
       ];
       events = {
         "before-sleep" = (display "off") + "; " + lock + "; rfkill block all";
-        "after-resume" = display "on" +"; rfkill unblock all";
+        "after-resume" = display "on" + "; rfkill unblock all";
         "lock" = (display "off") + "; " + lock;
         "unlock" = display "on";
       };
