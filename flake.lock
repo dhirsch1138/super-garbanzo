@@ -150,16 +150,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1792941568,
-        "narHash": "sha256-dhW4NK6CGP9e2dEh+4GkONJGeABkzg3JD9r3pd69+L8=",
+        "lastModified": 1792959033,
+        "narHash": "sha256-cYHgLFZuxwbsoQyKzHhoMNymqD+uhd8gtGyfGfIYbQU=",
         "owner": "dhirsch1138",
         "repo": "slowflakes",
-        "rev": "01c21c59696828cb6485e85c1d0b03e9aeb2e64c",
+        "rev": "e534f013d550d9e5002a722fcbf0dc9d8916c60b",
         "type": "github"
       },
       "original": {
         "owner": "dhirsch1138",
-        "ref": "slowflakes0.1",
         "repo": "slowflakes",
         "type": "github"
       }
