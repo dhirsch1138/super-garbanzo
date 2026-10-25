@@ -23,7 +23,7 @@
 
     # Slow Flakes for delayed flake.lock updates
     slowflakes = {
-      url = "github:dhirsch1138/slowflakes/slowflakes0.1";
+      url = "github:dhirsch1138/slowflakes";
       inputs.nixpkgs.follows = "nixpkgs"; # Bind to host system nixpkgs
     };
   };
