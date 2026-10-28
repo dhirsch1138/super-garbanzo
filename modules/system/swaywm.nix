@@ -25,41 +25,38 @@ in
       wl-clipboard
     ];
     programs.sway = {
-      wrapperFeatures.gtk = lib.mkOptionDefault true;
+      wrapperFeatures.gtk = lib.mkDefault true;
     };
     # gsettings
-    programs.dconf.enable = lib.mkOptionDefault true;
+    programs.dconf.enable = lib.mkDefault true;
 
     # GNOME Keyring is used to store secrets (like passwords)
-    services.gnome.gnome-keyring.enable = lib.mkOptionDefault true;
+    services.gnome.gnome-keyring.enable = lib.mkDefault true;
 
     # allow swaylock to (un)lock gnome keyring
     security.pam.services = {
-      swaylock.enableGnomeKeyring = lib.mkOptionDefault true;
+      swaylock.enableGnomeKeyring = lib.mkDefault true;
       #  gdm.enableGnomeKeyring = true;
     };
 
     # enable tumbler for thumbnail generation in file managers like thunar
-    services.tumbler.enable = lib.mkOptionDefault true;
+    services.tumbler.enable = lib.mkDefault true;
 
     # Thunar will serve as the GUI file manager for the sway session
     programs.thunar = {
-      enable = lib.mkOptionDefault true;
-    };
-
-    # Enable xfconf to allow for thunar to work outside of xfce4 session.
-    programs.xfconf.enable = lib.mkOptionDefault true;
-
-    config = {
-      programs.thunar.plugins =
+      enable = lib.mkDefault true;
+      plugins =
         with pkgs;
-        lib.mkOptionDefault [
+        lib.mkDefault [
           thunar-archive-plugin
           thunar-volman
         ];
     };
 
+    # Enable xfconf to allow for thunar to work outside of xfce4 session.
+    programs.xfconf.enable = lib.mkDefault true;
+
     # GNOME Virtual file service (for things like trash folder)
-    services.gvfs.enable = lib.mkOptionDefault true;
+    services.gvfs.enable = lib.mkDefault true;
   };
 }

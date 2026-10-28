@@ -27,7 +27,7 @@
           let
             inherit (config.home-manager.users.user.wayland.windowManager.sway.config) modifier menu;
           in
-          lib.mkOptionDefault {
+          lib.mkDefault {
             # Brightness Controls
             "XF86MonBrightnessDown" = "exec light -U 10";
             "XF86MonBrightnessUp" = "exec light -A 10";
@@ -76,7 +76,7 @@
         let
           inherit (config.home-manager.users.user.services.mako.config) modifier menu;
         in
-        lib.mkOptionDefault {
+        lib.mkDefault {
           default-timeout = 10000;
         };
     };

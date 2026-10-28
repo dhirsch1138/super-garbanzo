@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -33,9 +34,9 @@ in
     boot.loader.systemd-boot.enable = lib.mkForce false;
 
     boot.lanzaboote = {
-      pkiBundle = lib.mkOptionDefault "/var/lib/sbctl";
-      autoGenerateKeys.enable = lib.mkOptionDefault true;
-      autoEnrollKeys.enable = lib.mkOptionDefault true;
+      pkiBundle = lib.mkDefault "/var/lib/sbctl";
+      autoGenerateKeys.enable = lib.mkDefault true;
+      autoEnrollKeys.enable = lib.mkDefault true;
     };
   };
 }

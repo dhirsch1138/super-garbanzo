@@ -16,10 +16,10 @@ let
 in
 {
   config = lib.mkIf config.programs.steam.enable {
-    programs.gamemode.enable = lib.mkOptionDefault true;
+    programs.gamemode.enable = lib.mkDefault true;
     programs.steam = {
-      remotePlay.openFirewall = lib.mkOptionDefault true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = lib.mkOptionDefault true; # Open ports for Source Dedicated Server hosting
+      remotePlay.openFirewall = lib.mkDefault true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = lib.mkDefault true; # Open ports for Source Dedicated Server hosting
       # Other general flags if available can be set here.
     };
   };

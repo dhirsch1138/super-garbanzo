@@ -19,7 +19,7 @@
           let
             inherit (config.home-manager.users.user.programs.waybar.settings) modifier menu;
           in
-          lib.mkOptionDefault {
+          lib.mkDefault {
             layer = "top";
             position = "top";
             height = 30;
