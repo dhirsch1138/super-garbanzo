@@ -15,7 +15,7 @@
 
 let
   # Check if any user module defined systemd-boot.enable as true
-  systemdBootRequested = lib.any (def: def.value == true) (
+  systemdBootRequested = lib.any (def: def == true) (
     options.boot.loader.systemd-boot.enable.definitions or [ ]
   );
 in
