@@ -18,7 +18,7 @@
 
   # Enable steam with supporting packages and configuration
   # reference: ./../modules/system/steam.nix
-  programs.steamwrapper.enable = true;
+  programs.steam.enable = true;
 
   # Enable slowflakes with supporting packages and configuration
   # Provide time delayed flake.lock updates to help avoid breakages from upstream changes
