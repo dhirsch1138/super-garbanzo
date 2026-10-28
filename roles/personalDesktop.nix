@@ -7,18 +7,14 @@
     ./../modules/system
   ];
 
-  # This desktop is a swaywm desktop,
-  # see swaywm.nix for the configuration of the sway window manager and related packages.
+  # Reference the swaywm.nix support module for additional default configuration
   programs.sway.enable = true;
 
   # Enable secure boot support.
-  # This wrapper includes supporting packages, and enables auto key generation and enrollment.
-  # When initially deployed, the UEFI will still need to be set to Learn/Setup in the BIOS
-  # so that the enrollement will be accepted.
-  boot.lanzabootewrapper.enable = true;
+  # Reference the secureboot.nix support module for additional default configuration
+  boot.lanzaboote.enable = true;
 
-  # Enable steam with supporting packages and configuration
-  # reference: ./../modules/system/steam.nix
+  # Reference the steam.nix support module for additional default configuration
   programs.steam.enable = true;
 
   # Enable slowflakes with supporting packages and configuration
