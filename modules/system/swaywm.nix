@@ -50,12 +50,14 @@ in
     # Enable xfconf to allow for thunar to work outside of xfce4 session.
     programs.xfconf.enable = lib.mkOptionDefault true;
 
-  config = {
-    programs.thunar.plugins = with pkgs; lib.mkOptionDefault [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
+    config = {
+      programs.thunar.plugins =
+        with pkgs;
+        lib.mkOptionDefault [
+          thunar-archive-plugin
+          thunar-volman
+        ];
+    };
 
     # GNOME Virtual file service (for things like trash folder)
     services.gvfs.enable = lib.mkOptionDefault true;

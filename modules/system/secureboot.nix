@@ -12,10 +12,11 @@
 #  programs.lanzaboote.enable = true;
 # And automatically get the benefit of this supporting configuration, keeping the top level config clean.
 
-
 let
   # Check if any user module defined systemd-boot.enable as true
-  systemdBootRequested = any (def: def.value == true) (options.boot.loader.systemd-boot.enable.definitions or []);
+  systemdBootRequested = any (def: def.value == true) (
+    options.boot.loader.systemd-boot.enable.definitions or [ ]
+  );
 in
 {
   config = lib.mkIf config.boot.lanzaboote.enable {
@@ -28,14 +29,13 @@ in
     # generated at installation time. So we force it to false
     # for now.
     # Log warning if systemd-boot 'was' part of the configuration
-    warnings = lib.optional systemdBootRequested 
-      "Warning: boot.loader.systemd-boot.enable is set to true, but Lanzaboote overrides it to false.";
+    warnings = lib.optional systemdBootRequested "Warning: boot.loader.systemd-boot.enable is set to true, but Lanzaboote overrides it to false.";
     boot.loader.systemd-boot.enable = lib.mkForce false;
 
     boot.lanzaboote = {
       pkiBundle = lib.mkOptionDefault "/var/lib/sbctl";
       autoGenerateKeys.enable = lib.mkOptionDefault true;
       autoEnrollKeys.enable = lib.mkOptionDefault true;
-    };   
+    };
   };
 }
