@@ -6,16 +6,11 @@
 }:
 
 ## Sway window manager
-
-with lib;
 let
-  cfg = config.programs.swaywrapper;
 in
 {
-  options.programs.swaywrapper = {
-    enable = mkEnableOption "sway with configuration wrapper";
-  };
-  config = mkIf cfg.enable {
+
+  config = lib.mkIf config.programs.sway.enable {
 
     # List packages installed in system profile.
     # You can use https://search.nixos.org/ to find more packages (and options).
@@ -23,12 +18,9 @@ in
       mako
       wl-clipboard
     ];
-
     programs.sway = {
-      enable = true;
       wrapperFeatures.gtk = true;
     };
-
     # gsettings
     programs.dconf.enable = true;
 
@@ -60,6 +52,5 @@ in
 
     # GNOME Virtual file service (for things like trash folder)
     services.gvfs.enable = true;
-
   };
 }

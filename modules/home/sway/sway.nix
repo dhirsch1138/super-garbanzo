@@ -7,11 +7,11 @@
 }:
 
 # This module provides a wrapper around the sway window manager to provide additional features and configuration options.
-# This only takes effect when programs.swaywrapper.enable is set to true.
+# This only takes effect when programs.sway.enable is set to true.
 
 {
 
-  config = lib.mkIf osConfig.programs.swaywrapper.enable {
+  config = lib.mkIf osConfig.programs.sway.enable {
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;

@@ -7,8 +7,9 @@
     ./../modules/system
   ];
 
-  # This desktop is a swaywm desktop, so enable the swaywm module.
-  programs.swaywrapper.enable = true;
+  # This desktop is a swaywm desktop,
+  # see swaywm.nix for the configuration of the sway window manager and related packages.
+  programs.sway.enable = true;
 
   # Enable secure boot support.
   # This wrapper includes supporting packages, and enables auto key generation and enrollment.

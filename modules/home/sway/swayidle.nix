@@ -8,11 +8,11 @@
 
 # This module provides a wrapper around the sway window manager to provide additional features and configuration options.
 # This module sets up swayidle to manage idle timeouts and locking.
-# This only takes effect when programs.swaywrapper.enable is set to true.
+# This only takes effect when programs.sway.enable is set to true.
 
 {
 
-  config = lib.mkIf osConfig.programs.swaywrapper.enable {
+  config = lib.mkIf osConfig.programs.sway.enable {
     services.swayidle =
       let
         # Lock command
