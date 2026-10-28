@@ -5,7 +5,7 @@
   ...
 }:
 
-# Sway window manager
+# Sway window manager support module
 # ---
 # If the sway program module is enabled, this provides default configuration that supports the sway WM.
 # The intent is that the configuration can just invoke:

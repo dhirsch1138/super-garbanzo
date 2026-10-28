@@ -11,10 +11,8 @@
   programs.sway.enable = true;
 
   # Enable secure boot support.
-  # This wrapper includes supporting packages, and enables auto key generation and enrollment.
-  # When initially deployed, the UEFI will still need to be set to Learn/Setup in the BIOS
-  # so that the enrollement will be accepted.
-  boot.lanzabootewrapper.enable = true;
+  # Reference the secureboot.nix support module for additional default configuration
+  boot.lanzaboote.enable = true;
 
   # Reference the steam.nix support module for additional default configuration
   programs.steam.enable = true;
