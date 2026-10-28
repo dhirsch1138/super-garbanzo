@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   lib,
   pkgs,
   ...
@@ -12,7 +13,7 @@ let
   cfg = config.programs.vscodewrapper;
   isGnomeKeyringEnabled =
     (config.services.gnome-keyring.enable or false)
-    || (config.osConfig.services.gnome.gnome-keyring.enable or false);
+    || (osConfig.services.gnome.gnome-keyring.enable or false);
 
   # You can extend this logic if you want to support other keyring solutions
   # (e.g., KeePassXC FdoSecrets or KWallet) by checking their respective enable flags.
