@@ -5,7 +5,13 @@
   ...
 }:
 
-## Sway window manager
+# Sway window manager
+# ---
+# If the sway program module is enabled, this provides default configuration that supports the sway WM.
+# The intent is that the configuration can just invoke:
+#  programs.sway.enable = true;
+# And automatically get the benefit of this supporting configuration, keeping the top level config clean.
+
 let
 in
 {
@@ -19,38 +25,39 @@ in
       wl-clipboard
     ];
     programs.sway = {
-      wrapperFeatures.gtk = true;
+      wrapperFeatures.gtk = lib.mkOptionDefault true;
     };
     # gsettings
-    programs.dconf.enable = true;
+    programs.dconf.enable = lib.mkOptionDefault true;
 
     # GNOME Keyring is used to store secrets (like passwords)
-    services.gnome.gnome-keyring.enable = true;
+    services.gnome.gnome-keyring.enable = lib.mkOptionDefault true;
 
     # allow swaylock to (un)lock gnome keyring
     security.pam.services = {
-      swaylock.enableGnomeKeyring = true;
+      swaylock.enableGnomeKeyring = lib.mkOptionDefault true;
       #  gdm.enableGnomeKeyring = true;
     };
 
     # enable tumbler for thumbnail generation in file managers like thunar
-    services.tumbler.enable = true;
+    services.tumbler.enable = lib.mkOptionDefault true;
 
     # Thunar will serve as the GUI file manager for the sway session
     programs.thunar = {
-      enable = true;
+      enable = lib.mkOptionDefault true;
     };
 
     # Enable xfconf to allow for thunar to work outside of xfce4 session.
-    programs.xfconf.enable = true;
+    programs.xfconf.enable = lib.mkOptionDefault true;
 
-    # Plugins for thunar to allow for archive management and automounting of external drives
-    programs.thunar.plugins = with pkgs; [
+  config = {
+    programs.thunar.plugins = with pkgs; lib.mkOptionDefault [
       thunar-archive-plugin
       thunar-volman
     ];
+  };
 
     # GNOME Virtual file service (for things like trash folder)
-    services.gvfs.enable = true;
+    services.gvfs.enable = lib.mkOptionDefault true;
   };
 }
