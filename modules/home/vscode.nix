@@ -20,12 +20,11 @@ let
 in
 {
   config = mkIf config.programs.vscode.enable {
-
+  
     home.packages = with pkgs; [
       jq
       nil
       nixfmt
-      vscode
     ];
 
     # vscode isn't seeing that gnome keyring is setup
@@ -46,13 +45,13 @@ in
       fi
 
       # 3. Check if 'password-store' is already present in argv.json.
-      # If a password-store is already defined (not null/empty), do not overwrite it.
-      CURRENT_STORE=$(jq -r '.["password-store"] // empty' "$ARGV_FILE")
+      # Strip out // comments so jq can successfully parse VS Code's JSONC format.
+      CURRENT_STORE=$(sed '/^[[:space:]]*\/\//d' "$ARGV_FILE" | jq -r '.["password-store"] // empty')
 
       if [ -z "$CURRENT_STORE" ]; then
         # Upsert/add the password-store entry without destroying other settings
         TMP_FILE=$(mktemp)
-        jq '. + {"password-store": "gnome-libsecret"}' "$ARGV_FILE" > "$TMP_FILE"
+        sed '/^[[:space:]]*\/\//d' "$ARGV_FILE" | jq '. + {"password-store": "gnome-libsecret"}' > "$TMP_FILE"
         mv "$TMP_FILE" "$ARGV_FILE"
       fi
 
