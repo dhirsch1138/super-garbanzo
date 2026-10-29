@@ -10,7 +10,6 @@
 
 with lib;
 let
-  cfg = config.programs.vscodewrapper;
   isGnomeKeyringEnabled =
     (config.services.gnome-keyring.enable or false)
     || (osConfig.services.gnome.gnome-keyring.enable or false);
@@ -20,14 +19,7 @@ let
   hasSecretService = isGnomeKeyringEnabled; # add other providers here if desired
 in
 {
-  options.programs.vscodewrapper = {
-    enable = mkEnableOption "enable vscode w/ supporting configuration";
-  };
-
-  config = mkIf cfg.enable {
-    programs.vscode = {
-      enable = true;
-    };
+  config = mkIf config.programs.vscode.enable {
 
     home.packages = with pkgs; [
       jq
