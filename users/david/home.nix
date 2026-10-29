@@ -119,7 +119,7 @@
     enable = true;
     iconTheme = {
       package = pkgs.rose-pine-icon-theme;
-      name = "rose-pine-moon";
+      name = "rose-pine-rose";
     };
     theme = {
       package = pkgs.rose-pine-gtk-theme;
@@ -137,7 +137,8 @@
     themeName = "rose-pine-moon";
   };
 
-  programs.vscodewrapper.enable = true;
+  # Reference the vscode.nix support module for additional default configuration
+  programs.vscode.enable = true;
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
