@@ -30,49 +30,7 @@
 
   # This is machine specific for Helios (powerspec G228)
   # TODO : move this into a module for this machine, and then import it here.
-  boot.acpiFix.enableForce = true;
-  boot.acpiFix.enableEnforceResourcesLax = true;
+  # boot.acpiFix.enableForce = true;
+  # boot.acpiFix.enableEnforceResourcesLax = true;
 
-  systemd.services.run-on-shutdown = {
-    description = "Run custom command on shutdown";
-    wantedBy = [
-      "halt.target"
-      "poweroff.target"
-      "reboot.target"
-    ];
-    before = [
-      "halt.target"
-      "poweroff.target"
-      "reboot.target"
-    ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "/bin/true";
-      ExecStop = "${pkgs.util-linux}/bin/rfkill block all";
-    };
-  };
-
-  systemd.services.run-on-suspend = {
-    description = "Run custom command before going to sleep";
-    wantedBy = [ "sleep.target" ];
-    before = [ "sleep.target" ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.util-linux}/bin/rfkill block all";
-    };
-  };
-
-  systemd.services.run-on-resume = {
-    description = "Run custom command after waking up";
-    wantedBy = [ "post-resume.target" ];
-    after = [ "post-resume.target" ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.util-linux}/bin/rfkill unblock all";
-    };
-  };
 }
