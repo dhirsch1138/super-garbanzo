@@ -111,7 +111,8 @@
       email = "dhirsch1138@gmail.com";
     };
     settings = {
-      safe.directory = "*";
+ # Seeing if I still need this     
+ #     safe.directory = "*";
     };
   };
 
