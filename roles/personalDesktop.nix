@@ -32,4 +32,26 @@
   # TODO : move this into a module for this machine, and then import it here.
   boot.acpiFix.enableForce = true;
   boot.acpiFix.enableEnforceResourcesLax = true;
+
+  systemd.services.run-on-shutdown = {
+    description = "Run custom command on shutdown";
+    wantedBy = [
+      "halt.target"
+      "poweroff.target"
+      "reboot.target"
+    ];
+    before = [
+      "halt.target"
+      "poweroff.target"
+      "reboot.target"
+    ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "/bin/true";
+      ExecStop = "${pkgs.util-linux}/bin/rfkill block all";
+    };
+  };
+
 }
