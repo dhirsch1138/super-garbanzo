@@ -59,16 +59,9 @@ let
                     last_brace = content.rfind("}")
                     if last_brace != -1:
                         prefix = content[:last_brace].rstrip()
-                        ends_brace = prefix.endswith("{")
-                        ends_comma = prefix.endswith(",")
-                        needs_comma = not ends_brace and not ends_comma
-
-                        new_entry = '    "password-store": "gnome-libsecret"\n'
-                        if needs_comma:
-                            new_entry = ",\n" + new_entry
-                        else:
-                            new_entry = "\n" + new_entry
-
+                        if not prefix.endswith(",") and not prefix.endswith("{"):
+                            prefix = prefix + ","
+                        new_entry = '\n    "password-store": "gnome-libsecret"\n'
                         new_content = prefix + new_entry + content[last_brace:]
                         with open(path, "w") as f:
                             f.write(new_content)
