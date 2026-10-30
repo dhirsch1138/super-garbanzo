@@ -110,10 +110,6 @@
       name = "d";
       email = "dhirsch1138@gmail.com";
     };
-    settings = {
- # Seeing if I still need this     
- #     safe.directory = "*";
-    };
   };
 
   gtk = {
