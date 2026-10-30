@@ -54,4 +54,25 @@
     };
   };
 
+  systemd.services.run-on-suspend = {
+    description = "Run custom command before going to sleep";
+    wantedBy = [ "sleep.target" ];
+    before = [ "sleep.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.util-linux}/bin/rfkill block all";
+    };
+  };
+
+  systemd.services.run-on-resume = {
+    description = "Run custom command after waking up";
+    wantedBy = [ "post-resume.target" ];
+    after = [ "post-resume.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.util-linux}/bin/rfkill unblock all";
+    };
+  };
 }

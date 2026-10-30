@@ -33,22 +33,22 @@
             command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
           }
           {
-            timeout = 600;
+            timeout = 300;
             command = lock;
           }
           {
-            timeout = 900;
+            timeout = 240;
             command = display "off";
             resumeCommand = display "on";
           }
           {
-            timeout = 1200;
+            timeout = 600;
             command = "${pkgs.systemd}/bin/systemctl suspend";
           }
         ];
         events = {
-          "before-sleep" = (display "off") + "; " + lock + "; rfkill block all";
-          "after-resume" = display "on" + "; rfkill unblock all";
+          "before-sleep" = (display "off") + "; " + lock;
+          "after-resume" = display "on";
           "lock" = (display "off") + "; " + lock;
           "unlock" = display "on";
         };
