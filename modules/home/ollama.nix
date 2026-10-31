@@ -2,7 +2,7 @@
 {
 
   services.ollama = {
-    enable = false;
+    enable = true;
     package = pkgs.ollama-vulkan;
   };
 

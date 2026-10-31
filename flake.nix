@@ -3,8 +3,8 @@
   # I love that description. I refuse to change it.
 
   inputs = {
-    # NixOS official package source, using the nixos-26.05 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # NixOS official package source, using unstable branch
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Secure boot support
     lanzaboote = {
@@ -14,7 +14,8 @@
 
     # Home Manager for user level configuration
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      # unstable/rolling home-manager branch
+      url = "github:nix-community/home-manager";
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
       # the `inputs.nixpkgs` of the current flake,

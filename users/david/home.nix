@@ -118,10 +118,10 @@
       package = pkgs.rose-pine-icon-theme;
       name = "rose-pine-moon";
     };
-    theme = {
-      package = pkgs.rose-pine-gtk-theme;
-      name = "rose-pine-rose";
-    };
+ #   theme = {
+ #     package = pkgs.rose-pine-gtk-theme;
+ #     name = "rose-pine-rose";
+ #   };
   };
 
   programs.themes_sway = {
