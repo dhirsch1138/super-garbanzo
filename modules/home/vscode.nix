@@ -81,7 +81,7 @@ in
     home.packages = with pkgs; [
       nil
       nixfmt
-      cowsay
+      vscode
     ];
 
     home.activation.configureVscodeArgv = lib.mkIf hasSecretService ''

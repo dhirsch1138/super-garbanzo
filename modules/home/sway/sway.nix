@@ -23,6 +23,7 @@
           }
         ];
         modifier = "Mod4";
+        menu = "fuzzel";
         keybindings =
           let
             inherit (config.home-manager.users.user.wayland.windowManager.sway.config) modifier menu;
@@ -36,6 +37,7 @@
             "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
             "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
             "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+
           };
         startup = [
           {
