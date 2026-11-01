@@ -30,7 +30,7 @@
 
   # This is machine specific for Helios (powerspec G228)
   # TODO : move this into a module for this machine, and then import it here.
-  # boot.acpiFix.enableForce = true;
-  # boot.acpiFix.enableEnforceResourcesLax = true;
+  boot.acpiFix.enableForce = true;
+  boot.acpiFix.enableEnforceResourcesLax = true;
 
 }
