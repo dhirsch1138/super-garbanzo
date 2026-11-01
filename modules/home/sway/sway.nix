@@ -53,6 +53,12 @@
       };
       extraConfig = ''
         hide_edge_borders smart_no_gaps
+        # When you use `for_window` the command you give is not executed
+        # immediately. It is stored in a list and the command is executed
+        # every time a window opens or changes (eg. title) in a way that
+        # matches the criteria.
+        # inhibit idle for fullscreen apps
+        for_window [app_id="^.*"] inhibit_idle fullscreen        
       '';
     };
 
