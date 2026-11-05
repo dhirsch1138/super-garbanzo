@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-1b3393b2-2dfa-48e6-a480-d7ae4e76e69f".device = "/dev/disk/by-uuid/1b3393b2-2dfa-48e6-a480-d7ae4e76e69f";
+  boot.initrd.luks.devices."luks-4eca788e-3ada-4487-8c9a-22f08349d01c".device = "/dev/disk/by-uuid/4eca788e-3ada-4487-8c9a-22f08349d01c";
   networking.hostName = "helios"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -52,16 +52,20 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."david" = {
     isNormalUser = true;
-    description = "David Hirsch";
+    description = "David";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  #  environment.systemPackages = with pkgs; [
-  #    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  ];
+  # environment.systemPackages = with pkgs; [
+  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #   wget
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
