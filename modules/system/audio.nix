@@ -11,6 +11,13 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment the following
     #jack.enable = true;
+    extraConfig = {
+      pipewire."99-silent-bell.conf" = {
+        "context.properties" = {
+          "module.x11.bell" = false;
+        };
+      };
+    };
   };
 
   # https://nixos.wiki/wiki/NixOS_wiki:Audio
