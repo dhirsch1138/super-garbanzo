@@ -14,6 +14,6 @@
   };
 
   # https://nixos.wiki/wiki/NixOS_wiki:Audio
-  services.pulseaudio.enable = false;
+  # services.pulseaudio.enable = false;
 
 }
