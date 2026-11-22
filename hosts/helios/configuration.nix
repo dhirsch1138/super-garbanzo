@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-4eca788e-3ada-4487-8c9a-22f08349d01c".device = "/dev/disk/by-uuid/4eca788e-3ada-4487-8c9a-22f08349d01c";
+  boot.initrd.luks.devices."luks-6d0abd1d-45c3-4368-a2d6-4370d9b0d438".device = "/dev/disk/by-uuid/6d0abd1d-45c3-4368-a2d6-4370d9b0d438";
   networking.hostName = "helios"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -52,7 +52,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."david" = {
     isNormalUser = true;
-    description = "David";
+    description = "David Hirsch";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
