@@ -85,7 +85,7 @@
     enableCompletion = true;
   };
 
-  programs.firefox = {
+  programs.librewolf = {
     enable = true;
   };
 
