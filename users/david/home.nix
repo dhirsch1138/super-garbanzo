@@ -58,10 +58,11 @@
     # misc
     bat
     cbonsai
-    cmatrix
     file
     fortune
+    htop
     which
+    tmux
     tree
     gawk
     gnupg
